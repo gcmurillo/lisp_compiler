@@ -12,6 +12,8 @@ tokens = [
 	'COMMENT',  # ; cualquier cosa
 	'NUMBER',
 	'COMILLA_SIMPLE',
+	'COMILLA_DOBLE',
+	'TEXT'
 ]
 
 t_PLUS = r'\+'
@@ -23,7 +25,8 @@ t_RPAREN = r'\)'
 t_SYMBOL = r'[a-z]\w*'
 t_COMMENT = r';\s?\w[\w\s]*\n'
 t_COMILLA_SIMPLE = r"\'"
-
+t_COMILLA_DOBLE = r'\"'
+t_TEXT = r"(\'[\w\s]*\'|\"[\w\s]*\")"
 
 # reserved words
 reserved = {
@@ -78,7 +81,7 @@ def t_newline(t):
 	t.lexer.lineno += len(t.value)
 
 def t_ID(t):
-	r'([a-z]+|&optional|&rest)'
+	r'([a-z]+|&optional|&rest|writeline)'
 	if t.value in reserved:
     		t.type = reserved[t.value]
 	else:
@@ -104,3 +107,5 @@ def test(code):
 test("((lambda (x) (* x x)) 1 2 3)")
 test("""(lambda (a b c) ; esto es un comentario
 		(+ a b c))""")
+
+test("(write-line 'hello'")
