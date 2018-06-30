@@ -33,6 +33,7 @@ reserved = {
 	'setq': "SETQ",
 	'defun': "DEFUN", 
 	'quote': "QUOTE", 
+	'write-line' : "WRITE_LINE",
 	'set': "SET", 
 	't': "T", 
 	'nil': "NIL", 
@@ -81,7 +82,7 @@ def t_newline(t):
 	t.lexer.lineno += len(t.value)
 
 def t_ID(t):
-	r'([a-z]+|&optional|&rest|writeline)'
+	r'([a-z-]+|&optional|&rest)'
 	if t.value in reserved:
     		t.type = reserved[t.value]
 	else:
@@ -108,4 +109,4 @@ test("((lambda (x) (* x x)) 1 2 3)")
 test("""(lambda (a b c) ; esto es un comentario
 		(+ a b c))""")
 
-test("(write-line 'hello'")
+test("(write-line 'hello')")
