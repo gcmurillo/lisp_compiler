@@ -8,7 +8,7 @@ tokens = [
 	'DIVIDED', # /
 	'LPAREN', # (
 	'RPAREN', # )
-	'SYMBOLS', # variable names
+	'SYMBOL', # variable names
 	'COMMENT',  # ; cualquier cosa
 	'NUMBER',
 	'COMILLA_SIMPLE',
@@ -20,7 +20,7 @@ t_TIMES = r'\*'
 t_DIVIDED = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_SYMBOLS = r'[a-z]\w*'
+t_SYMBOL = r'[a-z]\w*'
 t_COMMENT = r';\s?\w[\w\s]*\n'
 t_COMILLA_SIMPLE = r"\'"
 
@@ -77,14 +77,15 @@ def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += len(t.value)
 
-#TODO: validar variables con token SYMBOLS no ID
 def t_ID(t):
 	r'([a-z]+|&optional|&rest)'
 	if t.value in reserved:
     		t.type = reserved[t.value]
+	else:
+    		t.type = 'SYMBOL'
 	return t
 
-t_ignore = ' '
+t_ignore = ' \t'
 
 def t_error(t):
 	print("Incorrect character '%s'" % t.value[0])
@@ -92,12 +93,14 @@ def t_error(t):
 
 lexer = lex.lex()
 
-code = "(lambda (x) (* x x)"
+def test(code):
+	lexer.input(code)
+	while True:
+		tok = lexer.token()
+		if not tok:
+			break
+		print(tok)
 
-lexer.input(code)
-
-while True:
-	tok = lexer.token()
-	if not tok:
-		break
-	print(tok)
+test("((lambda (x) (* x x)) 1 2 3)")
+test("""(lambda (a b c) ; esto es un comentario
+		(+ a b c))""")
