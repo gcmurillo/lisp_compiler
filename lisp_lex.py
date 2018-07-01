@@ -23,7 +23,7 @@ t_DIVIDED = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_SYMBOL = r'[a-z]\w*'
-t_COMMENT = r';\s?\w[\w\s]*\n'
+t_COMMENT = r';\s*[\w][\w\s\:\.\_]*\n'
 t_COMILLA_SIMPLE = r"\'"
 t_COMILLA_DOBLE = r'\"'
 t_TEXT = r"(\'[\w\s]*\'|\"[\w\s]*\")"
@@ -82,7 +82,7 @@ def t_newline(t):
 	t.lexer.lineno += len(t.value)
 
 def t_ID(t):
-	r'([a-z-]+|&optional|&rest)'
+	r'([a-z\-0-9]+|&optional|&rest)'
 	if t.value in reserved:
     		t.type = reserved[t.value]
 	else:
@@ -105,8 +105,12 @@ def test(code):
 			break
 		print(tok)
 
-test("((lambda (x) (* x x)) 1 2 3)")
-test("""(lambda (a b c) ; esto es un comentario
-		(+ a b c))""")
+#test("((lambda (x) (* x x)) 1 2 3)")
+#test("""(lambda (a b c) ; esto es un comentario
+#		(+ a b c))""")
 
-test("(write-line 'hello')")
+#test("(write-line 'hello')")
+
+test(""" ((lambda (n &optional n1) ; One required and one optional:
+                (if n1 (+ n n1) (1+ n))) ; 1 or 2 Arguments.
+              1 2) """)
