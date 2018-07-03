@@ -13,7 +13,8 @@ tokens = [
 	'NUMBER',
 	'COMILLA_SIMPLE',
 	'COMILLA_DOBLE',
-	'TEXT'
+	'TEXT',
+	'DECIMAL'
 ]
 
 t_PLUS = r'\+'
@@ -26,7 +27,7 @@ t_SYMBOL = r'[a-z]\w*'
 t_COMMENT = r';\s*[\w][\w\s\:\.\_]*\n'
 t_COMILLA_SIMPLE = r"\'"
 t_COMILLA_DOBLE = r'\"'
-t_TEXT = r"(\'[\w\s]*\'|\"[\w\s]*\")"
+t_TEXT = r"(\'[\w\s\.]*\'|\"[\w\s\.]*\")"
 
 # reserved words
 reserved = {
@@ -37,7 +38,8 @@ reserved = {
 	'set': "SET", 
 	't': "T", 
 	'nil': "NIL", 
-	'car': "CAR", 
+	'car': "CAR",
+	'exp': "EXP", 
 	'cdr': "CDR", 
 	'nth': "NTH", 
 	'nthcdr': "NTHCDR", 
@@ -72,6 +74,11 @@ reserved = {
 
 tokens = tokens + list(reserved.values())
 
+def t_DECIMAL(t):
+	r'\d+\.\d+'
+	t.value = float(t.value)
+	return t
+
 def t_NUMBER(t):
 	r'\d+'
 	t.value = int(t.value)
@@ -105,12 +112,16 @@ def test(code):
 			break
 		print(tok)
 
-#test("((lambda (x) (* x x)) 1 2 3)")
-#test("""(lambda (a b c) ; esto es un comentario
-#		(+ a b c))""")
+test("((lambda (x) (* x x)) 1 2 3)")
+test("""(lambda (a b c) ; esto es un comentario
+		(+ a b c))""")
 
-#test("(write-line 'hello')")
+test("(write-line 'hello')")
 
 test(""" ((lambda (n &optional n1) ; One required and one optional:
                 (if n1 (+ n n1) (1+ n))) ; 1 or 2 Arguments.
               1 2) """)
+
+test("""(lambda (x)
+       "Return the hyperbolic cosine of X."
+       (* 0.5 (+ (exp x) (exp (- x)))))""")
