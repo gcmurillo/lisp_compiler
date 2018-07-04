@@ -2,19 +2,34 @@
 import ply.yacc as yacc
 from lisp_lex import tokens
 
+""" Lambda Structure: 
+    (lambda (arg-variables...)
+       [documentation-string]
+       [interactive-declaration]
+       body-forms...)
+"""
 
+def p_expresion_lambda(p):
+    """expresion : LPAREN LAMBDA LPAREN symbol_list RPAREN RPAREN """
+    print("Correct!")
 
 def p_expresion_plus(p):
-    """expresion : LPAREN PLUS factor factor RPAREN """
-    p[0] = p[3] + p[4]
+    """expresion : LPAREN PLUS arguments RPAREN """
+    print("correcto")
 
+
+def p_arguments_multiple(p):
+    """arguments : factor factor
+                 | arguments factor"""
+
+def p_symbol_list(p):
+    """symbol_list : SYMBOL
+                   | symbol_list SYMBOL"""
 
 def p_factor(p):
     """factor : SYMBOL 
               | NUMBER 
               | DECIMAL """
-    p[0] = p[1]
-
 
 def p_error(p):
     print("Syntax error!")
@@ -32,4 +47,3 @@ while True:
 
     if not s: continue
     result = parser.parse(s)
-    print(result)
