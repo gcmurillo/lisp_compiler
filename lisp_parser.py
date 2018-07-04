@@ -10,18 +10,27 @@ from lisp_lex import tokens
 """
 
 def p_expresion_lambda(p):
-    """expresion_lambda : LPAREN LAMBDA LPAREN symbol_list RPAREN RPAREN 
-                 | LPAREN LAMBDA LPAREN symbol_list RPAREN TEXT RPAREN"""
+    """expresion_lambda : LPAREN LAMBDA LPAREN symbol_list RPAREN TEXT body RPAREN 
+    					| LPAREN LAMBDA LPAREN symbol_list RPAREN body RPAREN 
+    					| LPAREN LAMBDA LPAREN RPAREN body RPAREN"""
     print("Correct!")
 
-def p_expresion_plus(p):
-    """expresion : LPAREN PLUS arguments RPAREN """
-    print("correcto")
+def p_body(p):
+	"""body : LPAREN expresion RPAREN 
+			| factor
+			| body """
 
+def p_expresion(p):
+	""" expresion : LPAREN expresion RPAREN 
+				  | operator factor factor 
+				  | operator expresion expresion
+				  | operator subexpresion subexpresion
+				  | operator expresion expresion expresion
+				  | factor """
 
-def p_arguments_multiple(p):
-    """arguments : factor factor
-                 | arguments factor"""
+def p_subexpresion(p):
+	""" subexpresion : LPAREN factor factor RPAREN 
+					  | """
 
 def p_symbol_list(p):
     """symbol_list : SYMBOL
@@ -32,6 +41,11 @@ def p_factor(p):
               | NUMBER 
               | DECIMAL """
 
+def p_operator(p):
+	 """operator : PLUS 
+              | MINUS 
+              | TIMES
+              | DIVIDED """
 def p_error(p):
     print("Syntax error!")
 
