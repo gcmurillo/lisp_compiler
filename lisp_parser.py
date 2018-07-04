@@ -10,7 +10,8 @@ from lisp_lex import tokens
 """
 
 def p_expresion_lambda(p):
-    """expresion : LPAREN LAMBDA LPAREN symbol_list RPAREN RPAREN """
+    """expresion_lambda : LPAREN LAMBDA LPAREN symbol_list RPAREN RPAREN 
+                 | LPAREN LAMBDA LPAREN symbol_list RPAREN TEXT RPAREN"""
     print("Correct!")
 
 def p_expresion_plus(p):
