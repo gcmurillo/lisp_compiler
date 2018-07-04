@@ -15,6 +15,7 @@ tokens = [
 	'COMILLA_DOBLE',
 	'TEXT',
 	'DECIMAL'
+	'EQUAL'
 ]
 
 t_PLUS = r'\+'
@@ -28,6 +29,7 @@ t_COMMENT = r';\s*[\w][\w\s\:\.\_]*\n'
 t_COMILLA_SIMPLE = r"\'"
 t_COMILLA_DOBLE = r'\"'
 t_TEXT = r"(\'[\w\s\.]*\'|\"[\w\s\.]*\")"
+t_EQUAL = r'='
 
 # reserved words
 reserved = {
