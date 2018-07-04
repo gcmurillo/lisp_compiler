@@ -18,7 +18,7 @@ def p_expresion_lambda(p):
 def p_body(p):
 	"""body : LPAREN expresion RPAREN 
 			| factor
-			| body """
+			| expresion body """
 
 def p_expresion(p):
 	""" expresion : LPAREN expresion RPAREN 
@@ -51,9 +51,10 @@ def p_operator(p):
               | MINUS 
               | TIMES
               | DIVIDED 
-	      | EQUAL"""
+	            | EQUAL"""
 def p_booleans(p):
-	""" booleans : T | NIL"""
+	""" booleans : T 
+              | NIL"""
 def p_error(p):
     print("Syntax error!")
 
