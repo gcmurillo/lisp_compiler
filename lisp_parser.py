@@ -22,15 +22,20 @@ def p_body(p):
 
 def p_expresion(p):
 	""" expresion : LPAREN expresion RPAREN 
-				  | operator factor factor 
+				  | operator factor expresion 
 				  | operator expresion expresion
 				  | operator subexpresion subexpresion
 				  | operator expresion expresion expresion
+				  | ifs
 				  | factor """
 
 def p_subexpresion(p):
 	""" subexpresion : LPAREN factor factor RPAREN 
 					  | """
+def p_ifs(p):
+	""" ifs : IF booleans expresion expresion 
+		| IF expresion expresion expresion
+		| IF expresion expresion """
 
 def p_symbol_list(p):
     """symbol_list : SYMBOL
@@ -45,7 +50,10 @@ def p_operator(p):
 	 """operator : PLUS 
               | MINUS 
               | TIMES
-              | DIVIDED """
+              | DIVIDED 
+	      | EQUAL"""
+def p_booleans(p):
+	""" booleans : T | NIL"""
 def p_error(p):
     print("Syntax error!")
 
