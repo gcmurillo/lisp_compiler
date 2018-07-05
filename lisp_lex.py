@@ -58,6 +58,7 @@ constants = {
 	'pi': 'PI',
 	't': "T", 
 	'nil': "NIL",
+	'null': "NULL",
 }
 
 # reserved words
@@ -79,8 +80,7 @@ functions = {
 	'append': "APPEND", 
 	'incr': "INCR", 
 	'decr': "DECR", 
-	'push': "PUSH", 
-	'null': "NULL",
+	'push': "PUSH",
 	'defmacro':"DEFMACRO",
 	'typep':"TYPEP",
 	'defvar':"DEFVAR",

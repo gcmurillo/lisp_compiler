@@ -19,15 +19,16 @@ def p_body(p):
 			 | expresion_list body 
              | factor"""
 
+def p_expresion(p):
+	""" expresion : LPAREN operator factor_list  RPAREN
+                  | LPAREN operator expresion_list RPAREN
+                  | LPAREN FUNCTION factor_list RPAREN
+                  | LPAREN FUNCTION expresion_list RPAREN
+				  | ifs """
+
 def p_expresion_list(p):
       """ expresion_list : expresion
                          | expresion_list expresion """
-
-def p_expresion(p):
-	""" expresion : LPAREN expresion RPAREN 
-				  | LPAREN operator factor_list  RPAREN
-                  | LPAREN operator expresion_list RPAREN
-				  | ifs """
 
 def p_ifs(p):
 	""" ifs : IF booleans expresion expresion 
@@ -83,11 +84,11 @@ def p_error(p):
 
 
 parser = yacc.yacc()
-print("ENTER 'q' TO EXIT")
+print("ENTER '(quit)' TO EXIT")
 while True:
     try:
         s = input("lisp >>> ")
-        if s == 'q':
+        if s == '(quit)':
             break
     except EOFError:
         break
