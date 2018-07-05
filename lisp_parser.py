@@ -17,16 +17,18 @@ def p_expresion_lambda(p):
 def p_body(p):
 	""" body : expresion_list 
 			 | expresion_list body 
-       | factor"""
+             | factor"""
+
+def p_expresion_list(p):
+      """ expresion_list : expresion
+                         | expresion_list expresion """
 
 def p_expresion(p):
 	""" expresion : LPAREN expresion RPAREN 
 				  | LPAREN operator factor_list  RPAREN
-          | LPAREN operator expresion  expresion_list RPAREN
+                  | LPAREN operator expresion expresion_list RPAREN
 				  | ifs """
-def p_expresion_list(p):
-  """ expresion_list : expresion
-                    | expresion expresion_list"""
+
 def p_ifs(p):
 	""" ifs : IF booleans expresion expresion 
 		    | IF expresion expresion expresion
@@ -66,7 +68,11 @@ def p_operator(p):
                  | MINUS 
                  | TIMES
                  | DIVIDED 
-	             | EQUAL"""
+	             | EQUAL 
+                 | GT
+                 | LT
+                 | GEQT 
+                 | LEQT """
 
 def p_booleans(p):
 	""" booleans : T 

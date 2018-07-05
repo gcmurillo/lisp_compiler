@@ -15,7 +15,11 @@ tokens = [
 	'COMILLA_DOBLE',
 	'TEXT',
 	'DECIMAL',
-	'EQUAL'
+	'EQUAL',
+	'GT',
+	'LT',
+	'GEQT',
+	'LEQT'
 ]
 
 t_PLUS = r'\+'
@@ -30,6 +34,10 @@ t_COMILLA_SIMPLE = r"\'"
 t_COMILLA_DOBLE = r'\"'
 t_TEXT = r"(\'[\w\s\.]*\'|\"[\w\s\.]*\")"
 t_EQUAL = r'\='
+t_GT = r'>'
+t_LT = r'<'
+t_GEQT = r'>='
+t_LEQT = r'<=' 
 
 # reserved words
 reserved = {
