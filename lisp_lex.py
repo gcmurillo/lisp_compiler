@@ -107,24 +107,24 @@ def t_error(t):
 
 lexer = lex.lex()
 
-def test(code):
-	lexer.input(code)
-	while True:
-		tok = lexer.token()
-		if not tok:
-			break
-		print(tok)
+#def test(code):
+#	lexer.input(code)
+#	while True:
+#		tok = lexer.token()
+#		if not tok:
+#			break
+#		print(tok)
 
-test("((lambda (x) (* x x)) 1 2 3)")
-test("""(lambda (a b c) ; esto es un comentario
-		(+ a b c))""")
+#test("((lambda (x) (* x x)) 1 2 3)")
+#test("""(lambda (a b c) ; esto es un comentario
+#		(+ a b c))""")
 
-test("(write-line 'hello')")
+#test("(write-line 'hello')")
 
-test(""" ((lambda (n &optional n1) ; One required and one optional:
-                (if n1 (+ n n1) (1+ n))) ; 1 or 2 Arguments.
-              1 2) """)
+#test(""" ((lambda (n &optional n1) ; One required and one optional:
+#                (if n1 (+ n n1) (1+ n))) ; 1 or 2 Arguments.
+#              1 2) """)
 
-test("""(lambda (x)
-       "Return the hyperbolic cosine of X."
-       (* 0.5 (+ (exp x) (exp (- x)))))""")
+#test("""(lambda (x)
+#       "Return the hyperbolic cosine of X."
+#       (* 0.5 (+ (exp x) (exp (- x)))))""")

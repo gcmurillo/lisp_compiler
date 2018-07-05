@@ -11,19 +11,22 @@ from lisp_lex import tokens
 
 def p_expresion_lambda(p):
     """expresion_lambda : LPAREN LAMBDA LPAREN arguments RPAREN TEXT body RPAREN 
-    					| LPAREN LAMBDA LPAREN arguments RPAREN body RPAREN 
-    					| LPAREN LAMBDA LPAREN RPAREN body RPAREN"""
+    					| LPAREN LAMBDA LPAREN arguments RPAREN body RPAREN"""
     print("Correct!")
 
 def p_body(p):
-	""" body : expresion 
-			 | expresion body """
+	""" body : expresion_list 
+			 | expresion_list body 
+       | factor"""
 
 def p_expresion(p):
 	""" expresion : LPAREN expresion RPAREN 
-				  | LPAREN operator factor_list RPAREN
+				  | LPAREN operator factor_list  RPAREN
+          | LPAREN operator expresion  expresion_list RPAREN
 				  | ifs """
-
+def p_expresion_list(p):
+  """ expresion_list : expresion
+                    | expresion expresion_list"""
 def p_ifs(p):
 	""" ifs : IF booleans expresion expresion 
 		    | IF expresion expresion expresion
