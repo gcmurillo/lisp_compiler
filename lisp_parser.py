@@ -31,9 +31,18 @@ def p_ifs(p):
 
 def p_arguments(p):
     """ arguments : symbol_list
-                  | arguments optional_list """
+                  | optional_list
+                  | symbol_list optional_list
+                  | rest_list 
+                  | symbol_list rest_list 
+                  | symbol_list optional_list rest_list """
+
+def p_rest_list(p):
+    # &rest option in argument list
+    """ rest_list : REST symbol_list """
 
 def p_optional_list(p):
+    # &optional option in argument list
     """ optional_list : OPTIONAL symbol_list """
 
 def p_symbol_list(p):
