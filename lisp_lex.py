@@ -71,7 +71,8 @@ reserved = {
 	'from': "FROM",
 	'to': "TO",
 	'do': "DO",
-	'dotimes':"DOTIMES"
+	'dotimes':"DOTIMES",
+	'pi': 'PI'
 }
 
 tokens = tokens + list(reserved.values())

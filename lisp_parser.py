@@ -10,8 +10,8 @@ from lisp_lex import tokens
 """
 
 def p_expresion_lambda(p):
-    """expresion_lambda : LPAREN LAMBDA LPAREN symbol_list RPAREN TEXT body RPAREN 
-    					| LPAREN LAMBDA LPAREN symbol_list RPAREN body RPAREN 
+    """expresion_lambda : LPAREN LAMBDA LPAREN arguments RPAREN TEXT body RPAREN 
+    					| LPAREN LAMBDA LPAREN arguments RPAREN body RPAREN 
     					| LPAREN LAMBDA LPAREN RPAREN body RPAREN"""
     print("Correct!")
 
@@ -24,22 +24,21 @@ def p_expresion(p):
 				  | LPAREN operator factor_list RPAREN
 				  | ifs """
 
-def p_subexpresion(p):
-	""" subexpresion : LPAREN factor factor RPAREN 
-					 | """
-
 def p_ifs(p):
 	""" ifs : IF booleans expresion expresion 
 		    | IF expresion expresion expresion
 		    | IF expresion expresion """
 
-def p_symbol_list(p):
-    """ symbol_list : SYMBOL
-                    | symbol_list SYMBOL
-                    | symbol_list optional_list """
+def p_arguments(p):
+    """ arguments : symbol_list
+                  | arguments optional_list """
 
 def p_optional_list(p):
     """ optional_list : OPTIONAL symbol_list """
+
+def p_symbol_list(p):
+    """ symbol_list : SYMBOL
+                    | symbol_list SYMBOL """
 
 def p_factor_list(p):
     """ factor_list : factor 
