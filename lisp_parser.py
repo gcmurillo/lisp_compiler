@@ -12,7 +12,7 @@ from lisp_lex import tokens
 def p_expresion_lambda(p):
     """expresion_lambda : LPAREN LAMBDA LPAREN arguments RPAREN TEXT body RPAREN 
     					| LPAREN LAMBDA LPAREN arguments RPAREN body RPAREN"""
-    print("Correct!")
+    return("Correct!")
 
 def p_body(p):
 	""" body : expresion_list 
@@ -80,10 +80,11 @@ def p_booleans(p):
                  | NIL"""
 
 def p_error(p):
-    print("Syntax error!")
+    return("Syntax error!")
 
 
 parser = yacc.yacc()
+
 print("ENTER '(quit)' TO EXIT")
 while True:
     try:
@@ -95,3 +96,6 @@ while True:
 
     if not s: continue
     result = parser.parse(s)
+
+def validate(expr):
+    return parser.parse(expr)
