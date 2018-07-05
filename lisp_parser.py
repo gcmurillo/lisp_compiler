@@ -35,7 +35,11 @@ def p_ifs(p):
 
 def p_symbol_list(p):
     """ symbol_list : SYMBOL
-                    | symbol_list SYMBOL"""
+                    | symbol_list SYMBOL
+                    | symbol_list optional_list """
+
+def p_optional_list(p):
+    """ optional_list : OPTIONAL symbol_list """
 
 def p_factor_list(p):
     """ factor_list : factor 
