@@ -19,7 +19,8 @@ tokens = [
 	'GT',
 	'LT',
 	'GEQT',
-	'LEQT'
+	'LEQT',
+	'FUNCTION',
 ]
 
 t_PLUS = r'\+'
@@ -39,15 +40,33 @@ t_LT = r'<'
 t_GEQT = r'>='
 t_LEQT = r'<=' 
 
+reserved_words = {
+	'&rest': "REST",
+	'&optional': "OPTIONAL", 
+	'if': "IF",
+	'lambda':"LAMBDA",
+	'cond':"COND",
+	'when': "WHEN",
+	'case':"CASE",
+	'loop': "LOOP",
+	'from': "FROM",
+	'to': "TO",
+	'do': "DO",
+} 
+
+constants = {
+	'pi': 'PI',
+	't': "T", 
+	'nil': "NIL",
+}
+
 # reserved words
-reserved = {
+functions = {
 	'setq': "SETQ",
 	'defun': "DEFUN", 
 	'quote': "QUOTE", 
 	'write-line' : "WRITE_LINE",
 	'set': "SET", 
-	't': "T", 
-	'nil': "NIL", 
 	'car': "CAR",
 	'exp': "EXP", 
 	'cdr': "CDR", 
@@ -56,34 +75,22 @@ reserved = {
 	'last': "LAST", 
 	'length': "LENGTH", 
 	'first': "FIRST", 
-	'&rest': "REST",
-	'&optional': "OPTIONAL", 
 	'const': "CONST", 
 	'append': "APPEND", 
 	'incr': "INCR", 
 	'decr': "DECR", 
 	'push': "PUSH", 
-	'null': "NULL", 
-	'lambda':"LAMBDA",
+	'null': "NULL",
 	'defmacro':"DEFMACRO",
 	'typep':"TYPEP",
 	'defvar':"DEFVAR",
 	'write':"WRITE",
 	'prog':"PROG",
 	'defconstant': "DEFCONSTANT",
-	'cond':"COND",
-	'if': "IF",
-	'when': "WHEN",
-	'case':"CASE",
-	'loop': "LOOP",
-	'from': "FROM",
-	'to': "TO",
-	'do': "DO",
 	'dotimes':"DOTIMES",
-	'pi': 'PI'
 }
 
-tokens = tokens + list(reserved.values())
+tokens = tokens + list(functions.values()) + list(reserved_words.values()) + list(constants.values())
 
 def t_DECIMAL(t):
 	r'\d+\.\d+'
@@ -101,8 +108,12 @@ def t_newline(t):
 
 def t_ID(t):
 	r'([a-z\-0-9]+|&optional|&rest)'
-	if t.value in reserved:
-    		t.type = reserved[t.value]
+	if t.value in reserved_words:
+    		t.type = reserved_words[t.value]
+	elif t.value in constants:
+    		t.type = 'NUMBER'
+	elif t.value in functions:
+    		t.type = 'FUNCTION'
 	else:
     		t.type = 'SYMBOL'
 	return t
@@ -115,14 +126,15 @@ def t_error(t):
 
 lexer = lex.lex()
 
-#def test(code):
-#	lexer.input(code)
-#	while True:
-#		tok = lexer.token()
-#		if not tok:
-#			break
-#		print(tok)
-
+'''
+def test(code):
+	lexer.input(code)
+	while True:
+		tok = lexer.token()
+		if not tok:
+			break
+		print(tok)
+'''
 #test("((lambda (x) (* x x)) 1 2 3)")
 #test("""(lambda (a b c) ; esto es un comentario
 #		(+ a b c))""")
@@ -136,3 +148,5 @@ lexer = lex.lex()
 #test("""(lambda (x)
 #       "Return the hyperbolic cosine of X."
 #       (* 0.5 (+ (exp x) (exp (- x)))))""")
+
+#test("(lambda (x) (* pi 2))")

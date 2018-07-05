@@ -26,7 +26,7 @@ def p_expresion_list(p):
 def p_expresion(p):
 	""" expresion : LPAREN expresion RPAREN 
 				  | LPAREN operator factor_list  RPAREN
-                  | LPAREN operator expresion expresion_list RPAREN
+                  | LPAREN operator expresion_list RPAREN
 				  | ifs """
 
 def p_ifs(p):
