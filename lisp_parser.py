@@ -115,3 +115,6 @@ def validate(expr):
 validate("(lambda (x) (* x 5))") # correct
 validate("(lambda (x) (+ x 5 8 5))") # correct
 validate("(lambda (x &optional y) (+ x y))") # correct
+validate("(lambda (x &optional y z) (/ x y z))") #correct
+validate("(lambda (x &optional y &optional z) (/ x y z))") #incorrect
+validate("(lambda (x &optional y & rest z) (/ x y z))") #correct
