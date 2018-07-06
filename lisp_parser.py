@@ -34,8 +34,9 @@ def p_expresion(p):
 				  | ifs """
 
 def p_expresion_list(p):
-      """ expresion_list : expresion
-                         | expresion expresion_list  """
+    """ expresion_list : expresion
+                       | expresion expresion_list 
+                       | factor_list """
 
 def p_ifs(p):
 	""" ifs : IF booleans expresion expresion 
@@ -111,10 +112,21 @@ while True:
 def validate(expr):
     return parser.parse(expr)
 
-
+print("(lambda (x) (* x 5))")
 validate("(lambda (x) (* x 5))") # correct
+print("(lambda (x) (+ x 5 8 5))")
 validate("(lambda (x) (+ x 5 8 5))") # correct
+print("(lambda (x &optional y) (+ x y))")
 validate("(lambda (x &optional y) (+ x y))") # correct
+print("(lambda (x &optional y z) (/ x y z))")
 validate("(lambda (x &optional y z) (/ x y z))") #correct
+print("(lambda (x &optional y &optional z) (/ x y z))")
 validate("(lambda (x &optional y &optional z) (/ x y z))") #incorrect
-validate("(lambda (x &optional y & rest z) (/ x y z))") #correct
+print("(lambda (x &optional y &rest z) (/ x y z))")
+validate("(lambda (x &optional y &rest z) (/ x y z))") #correct
+print("(lambda (x &optional y &rest z) (* (+ x 5) 5))")
+validate("(lambda (x &optional y &rest z) (* (+ x 5) 5))") #correct
+print("(lambda(x) (* (+  (+ x 5) 5) 5 6 6 5))") 
+validate("(lambda(x) (* (+  (+ x 5) 5) 5 6 6 5))")  # correct
+print("(lambda (x) (* (+ (+ x 5) 5) 5 (+ x 5) 6 5))")
+validate("(lambda (x) (* (+ (+ x 5) 5) 5 (+ x 5) 6 5))") # corrects
