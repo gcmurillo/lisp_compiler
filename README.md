@@ -4,6 +4,14 @@
 
 In this job, we valid [**lambda expressions**](https://www.gnu.org/software/emacs/manual/html_node/elisp/Lambda-Expressions.html) in LISP programming language. Developed with [PLY](http://www.dabeaz.com/ply/ply.html#ply_nn23)
 
+## Capture
+
+![alt text][capture]
+
+## How to run
+
+``` python main.py ```
+
 ## Lambda structure 
 
 (lambda (arg-variables...)
@@ -41,3 +49,5 @@ The rest of the elements are the body of the function: the Lisp code to do the w
  * Tai Yu Chen
 
 ###### LISP compiler for Programming Languages subject | ESPOL 2018
+
+[capture]: https://github.com/gcmurillo/lisp_compiler/blob/master/capture.jpg
