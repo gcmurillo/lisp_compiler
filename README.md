@@ -4,7 +4,9 @@
 
 In this job, we valid [**lambda expressions**](https://www.gnu.org/software/emacs/manual/html_node/elisp/Lambda-Expressions.html) in LISP programming language. Developed with [PLY](http://www.dabeaz.com/ply/ply.html#ply_nn23)
 
-## Capture
+## GUI Capture
+
+Developed with [Tkinter](https://docs.python.org/3/library/tk.html)
 
 ![alt text][capture]
 
