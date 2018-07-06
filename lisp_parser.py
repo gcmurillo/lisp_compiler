@@ -35,7 +35,7 @@ def p_expresion(p):
 
 def p_expresion_list(p):
       """ expresion_list : expresion
-                         | expresion_list expresion """
+                         | expresion expresion_list  """
 
 def p_ifs(p):
 	""" ifs : IF booleans expresion expresion 
