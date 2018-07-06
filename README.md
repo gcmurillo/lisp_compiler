@@ -36,8 +36,8 @@ The rest of the elements are the body of the function: the Lisp code to do the w
 
 ### Developers
 
-..* Geancarlo Murillo
-..* Daniel Saigua
-..* Tai Yu Chen
+ * Geancarlo Murillo
+ * Daniel Saigua
+ * Tai Yu Chen
 
 ###### LISP compiler for Programming Languages subject | ESPOL 2018
