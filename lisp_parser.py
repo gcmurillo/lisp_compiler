@@ -9,10 +9,17 @@ from lisp_lex import tokens
        body-forms...)
 """
 
+
+file = open('res', 'a')
+file.close
+
 def p_expresion_lambda(p):
     """expresion_lambda : LPAREN LAMBDA LPAREN arguments RPAREN TEXT body RPAREN 
-    					| LPAREN LAMBDA LPAREN arguments RPAREN body RPAREN"""
-    return("Correct!")
+    					| LPAREN LAMBDA LPAREN arguments RPAREN body RPAREN"""   
+    print("Correct!")
+    file = open('res', 'a')
+    file.write("Correct!\n")
+    file.close()
 
 def p_body(p):
 	""" body : expresion_list 
@@ -80,11 +87,14 @@ def p_booleans(p):
                  | NIL"""
 
 def p_error(p):
-    return("Syntax error!")
-
+    print("Syntax error!")
+    file = open('res', 'a')
+    file.write('Syntax error!\n')
+    file.close()
 
 parser = yacc.yacc()
 
+'''
 print("ENTER '(quit)' TO EXIT")
 while True:
     try:
@@ -96,6 +106,7 @@ while True:
 
     if not s: continue
     result = parser.parse(s)
+'''
 
 def validate(expr):
     return parser.parse(expr)

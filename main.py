@@ -52,7 +52,10 @@ class App(Frame):
             self.errorMsg('error')
         else:
             result = validate(expr.get())
-            res.set(result)
+            file = open('res', 'r')
+            last_line = file.read().splitlines()[-1]
+            res.set(last_line)
+
 
 def main():
     root = Tk()
