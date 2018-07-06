@@ -50,4 +50,4 @@ The rest of the elements are the body of the function: the Lisp code to do the w
 
 ###### LISP compiler for Programming Languages subject | ESPOL 2018
 
-[capture]: https://github.com/gcmurillo/lisp_compiler/blob/master/capture.jpg
+[capture]: https://github.com/gcmurillo/lisp_compiler/blob/master/capture.JPG
