@@ -90,7 +90,6 @@ def p_booleans(p):
 
 def p_error(p):
     print("Syntax error!")
-    print(p.value[0])
     file = open('res', 'a')
     file.write('Syntax error!\n')
     file.close()
