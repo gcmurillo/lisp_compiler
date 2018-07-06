@@ -9,10 +9,10 @@ tokens = [
 	'LPAREN', # (
 	'RPAREN', # )
 	'SYMBOL', # variable names
-	#'COMMENT',  # ; cualquier cosa
+	'COMMENT',  # ; cualquier cosa
 	'NUMBER',
-	#'COMILLA_SIMPLE',
-	#'COMILLA_DOBLE',
+	'COMILLA_SIMPLE',
+	'COMILLA_DOBLE',
 	'TEXT',
 	'DECIMAL',
 	'EQUAL',
@@ -30,9 +30,9 @@ t_DIVIDED = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_SYMBOL = r'[a-z]\w*'
-#t_COMMENT = r';\s*[\w][\w\s\:\.\_]*\n'
-#t_COMILLA_SIMPLE = r"\'"
-#t_COMILLA_DOBLE = r'\"'
+t_COMMENT = r';\s*[\w][\w\s\:\.\_]*\n'
+t_COMILLA_SIMPLE = r"\'"
+t_COMILLA_DOBLE = r'\"'
 t_TEXT = r"(\'[\w\s\.]*\'|\"[\w\s\.]*\")"
 t_EQUAL = r'\='
 t_GT = r'>'
@@ -45,17 +45,6 @@ reserved_words = {
 	'&optional': "OPTIONAL", 
 	'if': "IF",
 	'lambda':"LAMBDA",
-} 
-
-constants = {
-	#'pi': 'PI',
-	't': "T", 
-	'nil': "NIL",
-	#'null': "NULL",
-}
-
-# reserved words
-"""functions = {
 	'cond':"COND",
 	'when': "WHEN",
 	'case':"CASE",
@@ -63,6 +52,17 @@ constants = {
 	'from': "FROM",
 	'to': "TO",
 	'do': "DO",
+} 
+
+constants = {
+	'pi': 'PI',
+	't': "T", 
+	'nil': "NIL",
+	'null': "NULL",
+}
+
+# reserved words
+functions = {
 	'setq': "SETQ",
 	'defun': "DEFUN", 
 	'quote': "QUOTE", 
@@ -88,9 +88,9 @@ constants = {
 	'prog':"PROG",
 	'defconstant': "DEFCONSTANT",
 	'dotimes':"DOTIMES",
-}"""
+}
 
-tokens = tokens  + list(reserved_words.values()) + list(constants.values())
+tokens = tokens + list(functions.values()) +  list(reserved_words.values()) + list(constants.values())
 
 def t_DECIMAL(t):
 	r'\d+\.\d+'
