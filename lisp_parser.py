@@ -27,11 +27,12 @@ def p_body(p):
              | factor"""
 
 def p_expresion(p):
-	""" expresion : LPAREN operator factor_list  RPAREN
+	""" expresion : LPAREN factor_list RPAREN 
+                  | LPAREN operator factor_list  RPAREN
                   | LPAREN operator expresion_list RPAREN
                   | LPAREN FUNCTION factor_list RPAREN
                   | LPAREN FUNCTION expresion_list RPAREN
-				  | ifs """
+				  | LPAREN ifs RPAREN"""
 
 def p_expresion_list(p):
     """ expresion_list : expresion
@@ -39,7 +40,7 @@ def p_expresion_list(p):
                        | factor_list """
 
 def p_ifs(p):
-	""" ifs : IF booleans expresion expresion 
+    """ ifs : IF booleans expresion expresion 
 		    | IF expresion expresion expresion
 		    | IF expresion expresion """
 
@@ -89,6 +90,7 @@ def p_booleans(p):
 
 def p_error(p):
     print("Syntax error!")
+    print(p.value[0])
     file = open('res', 'a')
     file.write('Syntax error!\n')
     file.close()
@@ -114,19 +116,30 @@ def validate(expr):
 
 print("(lambda (x) (* x 5))")
 validate("(lambda (x) (* x 5))") # correct
+
 print("(lambda (x) (+ x 5 8 5))")
 validate("(lambda (x) (+ x 5 8 5))") # correct
+
 print("(lambda (x &optional y) (+ x y))")
 validate("(lambda (x &optional y) (+ x y))") # correct
+
 print("(lambda (x &optional y z) (/ x y z))")
-validate("(lambda (x &optional y z) (/ x y z))") #correct
+validate("(lambda (x &optional y z) (/ x y z))") # correct
+
 print("(lambda (x &optional y &optional z) (/ x y z))")
-validate("(lambda (x &optional y &optional z) (/ x y z))") #incorrect
+validate("(lambda (x &optional y &optional z) (/ x y z))") # incorrect
+
 print("(lambda (x &optional y &rest z) (/ x y z))")
-validate("(lambda (x &optional y &rest z) (/ x y z))") #correct
+validate("(lambda (x &optional y &rest z) (/ x y z))") # correct
+
 print("(lambda (x &optional y &rest z) (* (+ x 5) 5))")
-validate("(lambda (x &optional y &rest z) (* (+ x 5) 5))") #correct
-print("(lambda(x) (* (+  (+ x 5) 5) 5 6 6 5))") 
-validate("(lambda(x) (* (+  (+ x 5) 5) 5 6 6 5))")  # correct
-print("(lambda (x) (* (+ (+ x 5) 5) 5 (+ x 5) 6 5))")
-validate("(lambda (x) (* (+ (+ x 5) 5) 5 (+ x 5) 6 5))") # corrects
+validate("(lambda (x &optional y &rest z) (* (+ x 5) 5))") # correct
+
+print("(lambda (x) (* (+ (+ x 5) 5) 5 6 6 5))") 
+validate("(lambda (x) (* (+ (+ x 5) 5) 5 6 6 5))")  # correct
+
+print("(lambda (x &rest y) (* (exp (+ x 5) 5)))") 
+validate("(lambda (x &rest y) (* (exp (+ x 5) 5)))")  # correct
+
+print("(lambda (&optional y) (if (y) (write y) (exp 2)))")
+validate("(lambda (&optional y) (if (y) (write y) (exp 2)))") # correct
