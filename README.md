@@ -2,7 +2,7 @@
 
 ## Objective 
 
-In this job, we valid **lambda expressions** in LISP programming language
+In this job, we valid [**lambda expressions**](https://www.gnu.org/software/emacs/manual/html_node/elisp/Lambda-Expressions.html) in LISP programming language. Developed with [PLY](http://www.dabeaz.com/ply/ply.html#ply_nn23)
 
 ## Lambda structure 
 
@@ -16,7 +16,7 @@ The second element is a list of symbols—the argument variable names. This is c
 
 The documentation string is a Lisp string object placed within the function definition to describe the function for the Emacs help facilities.
 
-The rest of the elements are the body of the function: the Lisp code to do the work of the function.
+The rest of the elements are the body of the function: the Lisp code to do the work of the function. [Structure](https://www.gnu.org/software/emacs/manual/html_node/elisp/Lambda-Components.html#Lambda-Components)
 
 ## Examples
 
