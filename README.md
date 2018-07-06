@@ -10,6 +10,8 @@ In this job, we valid [**lambda expressions**](https://www.gnu.org/software/emac
 
 ## How to run
 
+In the project folder
+
 ``` python main.py ```
 
 ## Lambda structure 
