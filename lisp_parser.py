@@ -110,3 +110,8 @@ while True:
 
 def validate(expr):
     return parser.parse(expr)
+
+
+validate("(lambda (x) (* x 5))") # correct
+validate("(lambda (x) (+ x 5 8 5))") # correct
+validate("(lambda (x &optional y) (+ x y))") # correct
